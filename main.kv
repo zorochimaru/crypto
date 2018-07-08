@@ -1,0 +1,391 @@
+#: import WipeTransition kivy.uix.screenmanager.WipeTransition
+<ScreenManagement>:
+	transition: WipeTransition()
+    MainScreen:
+    CaesarScreen:
+    VishenerScreen:
+    PolibiyScreen:
+    EmojiScreen:
+    FernetScreen:
+    AtbashScreen:
+    PlayfairScreen:
+
+<MainScreen>:
+	name: "main"
+	GridLayout:
+		rows:4
+		Button:
+			text:"Caesar cipher"
+			font_size:30
+			on_press: app.root.current='Caesar'
+		Button:
+			text:"Vigenere cipher"
+			font_size:30
+			on_press: app.root.current='Vishener'
+		Button:
+			text:"Polybius cipher"
+			font_size:30
+			on_press: app.root.current='Polibiy'
+		Button:
+			text:"Atbash cipher"
+			font_size:30
+			on_press: app.root.current='Atbash'
+		Button:
+			text:"Playfair cipher"
+			font_size:30
+			on_press: app.root.current='Playfair'
+		Button:
+			text:"Fernet"
+			font_size:30
+			on_press: app.root.current = 'Fernet'
+		Button:
+			text:"Emoji cipher"
+			font_size:30
+			on_press: app.root.current = 'Emoji'
+		BoxLayout:
+			orientation:'vertical'
+			Label:
+				font_name:'CinzelDecorative-Regular.ttf'
+				font_size:20
+				text:"Program by Rasim Karimli"
+			Image: 
+				source: 'logo.png'
+<CaesarScreen>:
+	name:"Caesar"
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:
+			BoxLayout:
+				orientation:'vertical'
+				Label:
+					font_size:25
+					font_name:'CinzelDecorative-Regular.ttf'
+					text:'Julius Caesar (100 B.C.)'
+				Button:
+					font_size: 30
+					text: "Back"
+					on_press: app.root.current = 'main'
+			Image: 
+				size_hint_x: 0.32
+				source: 'caesar.jpg'
+			BoxLayout:
+				orientation:'vertical'
+				Label:
+					font_size:25
+					text:'Choose shift'
+				Spinner:
+					id: caesar_gap
+					font_size:30
+					text: "1"
+					values:'1', '2','3','4','5'
+		TextInput:
+			id: caesar_in
+			font_size:20
+			text: "Input text"
+			on_focus:caesar_in.text = ""
+		BoxLayout:
+			Button:
+				id:caesar_enc
+				font_size:30
+				text:"Encrypt"
+				on_press: root.caesar_encrypt(caesar_in.text.upper(), int(caesar_gap.text))
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x +  self.parent.width - 100
+		            size: 100, 100
+			Button:
+				id:caesar_dec
+				font_size:30
+				text:"Decrypt"
+				on_press: root.caesar_decrypt(caesar_in.text.upper(), int(caesar_gap.text))
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x + self.parent.width - 100 
+		            size: 100, 100
+		TextInput:
+			id:caesar_out
+			font_size:20
+
+<VishenerScreen>:
+	name:'Vishener'
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:
+			BoxLayout:
+				orientation:'vertical'
+				Label:
+					font_size:25
+					font_name:'CinzelDecorative-Bold.ttf'
+					halign: 'center'
+					text:'Blaise de Vigenère\n(1523-1596 A.C.)'
+				Button:
+					font_size: 30
+					text: "Back"
+					on_press: app.root.current = 'main'
+			Image: 
+				size_hint_x: 0.33
+				source: 'vishener.jpg'
+			BoxLayout:
+				orientation:'vertical'
+				Label:
+					font_size:25
+					text:'Write keyword'
+				TextInput:
+					font_size:25
+					id: vishener_key
+		TextInput:
+			id: vishener_in
+			font_size:20
+			text: "Input text"
+			on_focus:vishener_in.text = ""
+		BoxLayout:
+			Button:
+				id:vishener_enc
+				font_size:30
+				text:"Encrypt"
+				on_press: root.vishener_encrypt(vishener_in.text.upper(), vishener_key.text.upper())
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x +  self.parent.width - 100
+		            size: 100, 100
+			Button:
+				id:caesar_dec
+				font_size:30
+				text:"Decrypt"
+				on_press: root.vishener_decrypt(vishener_out.text.upper(), vishener_key.text.upper())
+				Image:
+		            source: 'up.png'
+		            y: self.parent.y 
+		            x: self.parent.x
+		            size: 100, 100
+		TextInput:
+			id:vishener_out
+			font_size:20
+
+<PolibiyScreen>:
+	name:"Polibiy"
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:	
+			Button:
+				font_size: 30
+				text: "Back"
+				on_press: app.root.current = 'main'
+			Image: 
+				size_hint_x: 0.35
+				source: 'polibiy.jpg'
+			Label:
+				font_size:25
+				font_name:'CinzelDecorative-Regular.ttf'
+				text:'Polybius (206-124 B.C.)'
+		TextInput:
+			id: polibiy_in
+			font_size:20
+			text: "Input Text"
+			on_focus:polibiy_in.text=""
+		BoxLayout:
+			Button:
+				font_size:30
+				text:"Encrypt"
+				on_press: root.polibiy_encrypt(polibiy_in.text.upper())
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x +  self.parent.width - 100
+		            size: 100, 100
+			Button:
+				font_size:30
+				text:"Decrypt"
+				on_press: root.polibiy_decrypt(polibiy_out.text.upper()) 
+				Image:
+		            source: 'up.png'
+		            y: self.parent.y 
+		            x: self.parent.x
+		            size: 100, 100
+		TextInput:
+			id:polibiy_out
+			font_size:20
+
+<AtbashScreen>:
+	name:"Atbash"
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:
+			Button:
+				font_size: 30
+				text: "Back"
+				on_press: app.root.current = 'main'
+			Image: 
+				size_hint_x: 0.47
+				source: 'atbash.jpg'
+			Label:
+				font_size:20
+				font_name:'CinzelDecorative-Bold.ttf'
+				halign: 'center'
+				text: 'Possibly was invented\n by essenes\n (500 B.C.)'
+		TextInput:
+			id: atbash_in
+			font_size:20
+			text: "Input Text"
+			on_focus:atbash_in.text=""
+		BoxLayout:
+			Button:
+				font_size:30
+				text:"Encrypt"
+				on_press: root.atbash(atbash_in.text.upper())
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x +  self.parent.width - 100
+		            size: 100, 100
+			Button:
+				font_size:30
+				text:"Decrypt"
+				on_press: root.atbash(atbash_in.text.upper()) 
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x
+		            size: 100, 100
+		TextInput:
+			id:atbash_out
+			font_size:20
+
+<PlayfairScreen>:
+	name:"Playfair"
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:
+			Button:
+				font_size: 30
+				text: "Back"
+				on_press: app.root.current = 'main'
+			Image: 
+				size_hint_x: 0.42
+				source: 'playfair.jpg'
+			Label:
+				font_size:20
+				font_name:'CinzelDecorative-Regular.ttf'
+				halign: 'center'
+				text:'Lyon Playfair\n(1818-1898 A.D.)'
+		TextInput:
+			id: playfair_in
+			font_size:20
+			text: "Input Text"
+			on_focus:playfair_in.text=""
+		BoxLayout:
+			Button:
+				font_size:30
+				text:"Encrypt"
+				on_press: root.encryptDecrypt(True, list(playfair_in.text.upper()))
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x +  self.parent.width - 100
+		            size: 100, 100
+			Button:
+				font_size:30
+				text:"Decrypt"
+				on_press: root.encryptDecrypt(False, list(playfair_in.text.upper()))
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x
+		            size: 100, 100
+		TextInput:
+			id:playfair_out
+			font_size:20
+
+<EmojiScreen>:
+	name:"Emoji"
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:
+			Button:
+				font_size: 30
+				text: "Back"
+				on_press: app.root.current = 'main'
+			BoxLayout:
+				
+				Label:
+					font_name:'CinzelDecorative-Regular.ttf'
+					font_size:30
+					text:'EMOJI'
+				Image:
+					source:'emoji.png'
+		TextInput:
+			id: my_msg
+			font_size:20
+			text: "Input Text or Token"
+			on_focus:my_msg.text=""
+		BoxLayout:
+			Button:
+				font_size:30
+				text:"Encrypt"
+				on_press:root.emoenc(my_msg.text)
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x +  self.parent.width - 100
+		            size: 100, 100
+			Button:
+				font_size:30
+				text:"Decrypt"
+				on_press:root.emodec()
+				Image:
+		            source: 'up.png'
+		            y: self.parent.y 
+		            x: self.parent.x
+		            size: 100, 100
+		TextInput:
+			id:emo
+			font_size:20
+			font_name:'NotoEmoji-Regular.ttf'
+			
+<FernetScreen>:
+	name:"Fernet"
+	BoxLayout:
+		orientation:'vertical'
+		BoxLayout:
+			Button:
+				font_size: 30
+				text: "Back"
+				on_press: app.root.current = 'main'
+			BoxLayout:
+				orientation:'vertical'
+				Image:
+					source:'python.png'
+				Label:
+					font_name:'CinzelDecorative-Regular.ttf'
+					font_size:20
+					text:'Fernet(symmetric encryption)'
+		TextInput:
+			id: my_msg
+			font_size:20
+			text: "Input Text or Token"
+			on_focus:my_msg.text=""
+		BoxLayout:
+			Button:
+				font_size:30
+				text:"Encrypt"
+				on_press: root.fernetenc(my_msg.text)
+				Image:
+		            source: 'down.png'
+		            y: self.parent.y 
+		            x: self.parent.x +  self.parent.width - 100
+		            size: 100, 100
+			Button:
+				font_size:30
+				text:"Decrypt"
+				on_press: root.fernetdec(lbl.text)
+				Image:
+		            source: 'up.png'
+		            y: self.parent.y 
+		            x: self.parent.x
+		            size: 100, 100 
+		TextInput:
+			id:lbl
+			font_size:20
